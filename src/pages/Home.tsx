@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {ReactElement, useEffect} from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import firebase from "../config/firebase";
 
-function Home() {
+function Home(): ReactElement {
+
+    useEffect(() => {
+        const dbRef = firebase.database().ref('Todo-react-api');
+        console.log('dbRef', dbRef);
+    }, [])
+
     return (
         <div className="App">
             <header className="App-header">
