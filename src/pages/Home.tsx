@@ -43,9 +43,9 @@ function Home(props: IHome) {
     const classes = useStyles();
     const [data, setData] = useState<ITodo[]>([]);
 
-    const fetchData = (): void => {
+    const fetchData = (search?: string): void => {
         const dbRef = firebase.firestore().collection(refs);
-        const cont: ITodo[] = [];
+        let cont: ITodo[] = [];
         dbRef.get().then(snapshot => {
             snapshot.forEach(doc => {
                 const value = doc.data() as ITodo;
@@ -56,6 +56,9 @@ function Home(props: IHome) {
                     status: value.status
                 });
             });
+            if (!!search) {
+                cont = cont.filter(f => f.subject && f.subject.includes(search));
+            }
             setData(cont);
         });
     };
@@ -138,6 +141,14 @@ function Home(props: IHome) {
             saveData(props.newData);
         }
     } ,[props.newData])
+
+    useEffect(() => {
+        if (props && !!props.search) {
+            fetchData(props.search);
+        } else {
+            fetchData();
+        }
+    }, [props.search])
 
     useEffect(() => {
         fetchData();

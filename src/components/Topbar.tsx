@@ -57,6 +57,10 @@ const useStyles = makeStyles((theme: Theme) =>
 function Topbar(props: ITopbar): ReactElement {
     const classes = useStyles();
 
+    const handleSearch = (evt) => {
+        props.searchKey(evt.target.value);
+    }
+
     return (
         <AppBar>
             <Toolbar>
@@ -68,6 +72,7 @@ function Topbar(props: ITopbar): ReactElement {
                         <SearchIcon />
                     </div>
                     <InputBase
+                        onKeyUp={handleSearch}
                         placeholder="Search…"
                         classes={{
                             root: classes.inputRoot,

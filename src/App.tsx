@@ -11,6 +11,7 @@ function App() {
   const [newData, setNewData] = useState<ITodo|undefined>();
   const [editData, setEditData] = useState<ITodo>();
   const [deleteData, setDeleteData] = useState<ITodo>();
+  const [searchKey, setSearchKey] = useState<string>();
 
   const handleMenuEvent = () => {
       setEditData(undefined);
@@ -33,6 +34,10 @@ function App() {
       setDialogState(false);
   }
 
+  const handleSearchKey = (key: string) => {
+      setSearchKey(key);
+  }
+
   return (
       <>
         <DialogForm
@@ -41,10 +46,10 @@ function App() {
             submitEvent={handleSubmitForm}
             deleteEvent={handleDelete}
             closeEvent={ () => setDialogState(false)}/>
-        <Topbar menuEvent={handleMenuEvent}/>
+        <Topbar menuEvent={handleMenuEvent} searchKey={handleSearchKey}/>
         <Router>
           <Switch>
-            <Route path="/"> <Home newData={newData} deleteData={deleteData} openCard={handleOpenCard}/> </Route>
+            <Route path="/"> <Home search={searchKey} newData={newData} deleteData={deleteData} openCard={handleOpenCard}/> </Route>
           </Switch>
         </Router>
       </>
