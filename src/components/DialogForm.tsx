@@ -58,7 +58,7 @@ function DialogForm(props: IDialogForm): ReactElement {
     const onValueChange = (key: string, value: string): void => {
         let newVal = {...data};
         newVal[key] = value;
-        breakWords(value);
+        if (key === 'details') breakWords(value);
         setData(newVal);
     };
 
@@ -108,6 +108,12 @@ function DialogForm(props: IDialogForm): ReactElement {
         setSuggestions([]);
     }
 
+    const handleBlur = () => {
+        setTimeout(() => {
+            setSuggestions([]);
+        }, 1000);
+    }
+
     const renderSuggestions = useCallback(() => {
         return (
             suggestions && !!suggestions.length &&
@@ -136,6 +142,7 @@ function DialogForm(props: IDialogForm): ReactElement {
                            onChange={ (evt) => { onValueChange('subject', evt.target.value) } }/>
                 <div className={classes.textCont}>
                     <TextField label='Details' value={data.details} className={classes.fieldInput} required={true}
+                               onBlur={ () => { handleBlur() } }
                            onChange={ (evt) => { onValueChange('details', evt.target.value) } }/>
                     {renderSuggestions()}
                 </div>
