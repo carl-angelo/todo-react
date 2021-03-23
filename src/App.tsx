@@ -24,7 +24,6 @@ function App() {
   }
 
   const handleOpenCard = (data: ITodo) => {
-      console.log('handleOPenCard', data);
       setEditData(data);
       setDialogState(true);
   }

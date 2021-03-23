@@ -95,7 +95,8 @@ function Home(props: IHome) {
     };
 
     const cardDoubleClick = (data: ITodo) => {
-        props.openCard(data);
+        if (props && props.openCard)
+            props.openCard(data);
     }
 
     const renderData = (status: Status) => {
@@ -162,7 +163,7 @@ function Home(props: IHome) {
                         {(provided) => {
                                 return (
                                     <div ref={provided.innerRef} className={classes.childrenCont}>
-                                        <h4> Unstarted </h4>
+                                        <h4 id='unstarted'> Unstarted </h4>
                                         {renderData(Status.UNSTARTED)}
                                     </div>
                                 );
@@ -173,7 +174,7 @@ function Home(props: IHome) {
                         {(provided) => {
                             return (
                                 <div ref={provided.innerRef} className={classes.childrenCont}>
-                                    <h4> In Progress </h4>
+                                    <h4 id='in-progress'> In Progress </h4>
                                     {renderData(Status.IN_PROGRESS)}
                                 </div>
                             );
@@ -184,12 +185,11 @@ function Home(props: IHome) {
                         {(provided) => {
                             return (
                                 <div ref={provided.innerRef} className={classes.childrenCont}>
-                                    <h4> Completed </h4>
+                                    <h4 id='completed'> Completed </h4>
                                     {renderData(Status.COMPLETED)}
                                 </div>
                             );
-                        }
-                        }
+                        }}
                     </Droppable>
                 </DragDropContext>
             </div>

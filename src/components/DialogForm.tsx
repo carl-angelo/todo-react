@@ -89,8 +89,8 @@ function DialogForm(props: IDialogForm): ReactElement {
                 onChange={onStatusChange}
                 className={classes.fieldInput}
             >
-                {statusList.map(stat => {
-                    return <MenuItem value={stat}>{StatusUtil.title(stat)}</MenuItem>;
+                {statusList.map((stat, index) => {
+                    return <MenuItem key={index} value={stat}>{StatusUtil.title(stat)}</MenuItem>;
                 })}
             </Select>
         );

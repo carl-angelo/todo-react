@@ -4,5 +4,5 @@ export interface IHome {
     newData?: ITodo;
     search?: string;
     deleteData?: ITodo;
-    openCard: (data: ITodo) => void;
+    openCard?: (data: ITodo) => void;
 }
